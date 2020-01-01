@@ -1,0 +1,17 @@
+#!/bin/bash -e
+
+################################################################################
+
+# Default values
+CLAMAV_HOST="${1:-localhost}"; shift
+CLAMAV_PORT="${1:-3310}"
+
+# Check ClamAV daemon health with PING/PONG command
+if [ "$(echo PING | nc localhost 3310)" = "PONG" ]; then
+  echo "ClamAV daemon is running"
+else
+  echo "ClamAV daemon is not running"
+  exit 1;
+fi
+
+################################################################################
