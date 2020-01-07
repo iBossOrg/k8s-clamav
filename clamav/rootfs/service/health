@@ -2,8 +2,12 @@
 
 ################################################################################
 
+# Default parameters
+: ${CALAMAV_HOST:=${1:-localhost}}
+: ${CALAMAV_PORT:=${2:-3310}}
+
 # Check ClamAV daemon health with PING/PONG command
-if [ "$(echo PING | nc localhost 3310)" = "PONG" ]; then
+if [ "$(echo PING | nc ${CALAMAV_HOST} ${CALAMAV_PORT})" = "PONG" ]; then
   echo "ClamAV daemon is running"
 else
   echo "ClamAV daemon is not running"
