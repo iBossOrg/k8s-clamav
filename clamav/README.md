@@ -48,6 +48,11 @@ Health probe script `/service/health` use ClamAV PING/PONG command to test ClamA
 
 **NOTE: When a ClamAV daemon reloads a virus database, the health probe may wait up to 30 seconds to complete.**
 
+| Argument | Default value | Description |
+| -------- | ------------- | ----------- |
+| 1 | localhost | ClamAV daemon IP address. |
+| 2 | 3310 | ClamAV daemon TCP port. |
+
 ## Contributing
 
 Use the command `make`:
