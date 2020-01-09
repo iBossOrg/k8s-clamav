@@ -16,11 +16,11 @@ DOCKER_IMAGE_URL	?= https://www.clamav.net
 
 # Build a new image and run the tests
 .PHONY: all
-all: image clean
+all: build start wait logs test
 
 # Build an image, run tests and delete all containers and work files
 .PHONY: image
-image: _clean build start wait logs test
+image: _clean all
 
 ### BUILD_TARGETS ##############################################################
 
@@ -28,7 +28,7 @@ image: _clean build start wait logs test
 .PHONY: build
 build: docker-build
 
-# Build a new image without using the Docker layer caching
+# Delete all running containers and work files, build an image and run tests
 .PHONY: rebuild
 rebuild: docker-rebuild
 
@@ -98,7 +98,7 @@ clean: docker-clean
 # Helper that gives the opportunity to call the clean target twice
 .PHONY: _clean
 _clean:
-	@$(MAKE) docker-clean
+	@$(MAKE) clean
 
 ### MK_DOCKER_IMAGE ############################################################
 
